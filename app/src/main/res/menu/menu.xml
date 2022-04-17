@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_button_home"
+        android:title=""
+        android:icon="@drawable/ic_home_selector"/>
+    <item
+        android:id="@+id/menu_button_search"
+        android:title=""
+        android:icon="@drawable/ic_search_selector"/>
+</menu>
