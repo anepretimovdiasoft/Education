@@ -3,6 +3,7 @@ package ru.stavopol.education.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,8 +67,10 @@ public class AdapterPartOfChapter extends RecyclerView.Adapter<RecyclerView.View
 
         PartOfChapter partOfChapter = partOfChapterList.get(position);
 
-        ((MyViewHolder) holder).ivChapterImageTop.setImageResource(R.drawable.ic_launcher_background);
-        ((MyViewHolder) holder).ivChapterImageBottom.setImageResource(R.drawable.ic_launcher_background);
+        int drawableTopResourceId = context.getResources().getIdentifier(partOfChapter.getBottomImage(), "drawable", context.getPackageName());
+        int drawableBotResourceId = context.getResources().getIdentifier(partOfChapter.getBottomImage(), "drawable", context.getPackageName());
+        ((MyViewHolder) holder).ivChapterImageTop.setImageDrawable(context.getDrawable(drawableTopResourceId));
+        ((MyViewHolder) holder).ivChapterImageBottom.setImageDrawable(context.getDrawable(drawableBotResourceId));
         ((MyViewHolder) holder).tvChapterText.setText(partOfChapter.getChapterText());
 
     }

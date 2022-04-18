@@ -1,25 +1,34 @@
 package ru.stavopol.education.model;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class Question {
+public class QuestionMultChoice implements Serializable {
 
-    private Integer id;
+    private int id;
 
     private final String name;
 
     private Map<String, Boolean> answerMap;
 
+    private final int test_id;
 
-    public Question(Integer id, String name, Map<String, Boolean> answerMap) {
+
+    public QuestionMultChoice(int id, String name, Map<String, Boolean> answerMap, int test_id) {
         this.id = id;
         this.name = name;
         this.answerMap = answerMap;
+        this.test_id = test_id;
     }
 
-    public Question(String name, Map<String, Boolean> answerMap) {
+    public QuestionMultChoice(String name, Map<String, Boolean> answerMap, int test_id) {
         this.name = name;
         this.answerMap = answerMap;
+        this.test_id = test_id;
+    }
+
+    public int getTest_id() {
+        return test_id;
     }
 
     public Integer getId() {

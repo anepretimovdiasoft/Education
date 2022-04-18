@@ -75,7 +75,7 @@ public class AdapterChapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                 Intent intent = new Intent(context, ChapterActivity.class);
 
-                intent.putExtra(CHAPTER_NUMBER, position);
+                intent.putExtra(CHAPTER_NUMBER, chapterList.get(position));
 
                 context.startActivity(intent);
             }

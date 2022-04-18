@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import ru.stavopol.education.R;
 import ru.stavopol.education.adapter.AdapterPartOfChapter;
-import ru.stavopol.education.testdata.TestData;
+import ru.stavopol.education.model.Chapter;
 
 public class ChapterActivity extends AppCompatActivity {
 
@@ -19,14 +19,14 @@ public class ChapterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chapter);
 
-        int chapterNumber = getIntent().getIntExtra(CHAPTER_NUMBER, -1);
+        Chapter chapter = (Chapter) getIntent().getSerializableExtra(CHAPTER_NUMBER);
 
         TextView tvChapterLabel = findViewById(R.id.tv_chapter_label);
 
-        tvChapterLabel.setText(tvChapterLabel.getText().toString() + " " + (chapterNumber + 1));
+        tvChapterLabel.setText(chapter.getName());
 
         RecyclerView rvPartOfChapter = findViewById(R.id.rv_part_of_chapter);
-        AdapterPartOfChapter adapterPartOfChapter = new AdapterPartOfChapter(this, TestData.PART_OF_CHAPTER_LIST);
+        AdapterPartOfChapter adapterPartOfChapter = new AdapterPartOfChapter(this, chapter.getPartOfChapterList());
         rvPartOfChapter.setAdapter(adapterPartOfChapter);
     }
 }

@@ -1,8 +1,9 @@
 package ru.stavopol.education.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Chapter {
+public class Chapter implements Serializable {
 
     private Integer id;
 
