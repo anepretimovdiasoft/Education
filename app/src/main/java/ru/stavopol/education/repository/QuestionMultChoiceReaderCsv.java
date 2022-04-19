@@ -10,12 +10,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import ru.stavopol.education.model.AnswerMultChoice;
 import ru.stavopol.education.model.QuestionMultChoice;
 
 public class QuestionMultChoiceReaderCsv implements QuestionMultChoiceReader {
@@ -34,6 +36,9 @@ public class QuestionMultChoiceReaderCsv implements QuestionMultChoiceReader {
     @Override
     public List<QuestionMultChoice> findAllQuestionMultChoice() {
 
+        if (questionMultChoiceList != null)
+            return  questionMultChoiceList;
+
         List<QuestionMultChoice> questionMultChoiceList = new LinkedList<>();
 
         InputStream inputStream = context.getResources().openRawResource(rawResId);
@@ -43,26 +48,32 @@ public class QuestionMultChoiceReaderCsv implements QuestionMultChoiceReader {
 
         String line = "";
         QuestionMultChoice questionMultChoice;
-        Map<String, Boolean> answerList = new HashMap<>();
         try {
             while ((line = bufferedReader.readLine()) != null) {
-
+                List<AnswerMultChoice> answerMultChoiceList = new LinkedList<>();
                 String[] splitArray = line.split(";");
 
-                for (int i = 2; i < splitArray.length; i++) {
+                for (int i = 3; i < splitArray.length; i++) {
                     if (splitArray[i].charAt(splitArray[i].length() - 1) == 't')
-                        answerList.put(splitArray[i].substring(0, splitArray[i].length() - 2), true);
+                        answerMultChoiceList.add(new AnswerMultChoice(
+                                splitArray[i].substring(0, splitArray[i].length() - 1),
+                                true,
+                                Integer.parseInt(splitArray[0])
+                        ));
                     else
-                        answerList.put(splitArray[i].substring(0, splitArray[i].length() - 2), false);
+                        answerMultChoiceList.add(new AnswerMultChoice(
+                                splitArray[i].substring(0, splitArray[i].length() - 1),
+                                false,
+                                Integer.parseInt(splitArray[0])
+                        ));
                 }
 
                 questionMultChoice = new QuestionMultChoice(
                         splitArray[2],
-                        answerList,
+                        answerMultChoiceList,
                         Integer.parseInt(splitArray[1])
                 );
 
-                answerList.clear();
                 questionMultChoiceList.add(questionMultChoice);
             }
         } catch (IOException e) {

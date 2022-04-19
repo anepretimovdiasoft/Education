@@ -11,6 +11,8 @@ public class Test implements Serializable {
 
     private final List<QuestionMultChoice> questionMultChoiceList;
 
+    private boolean accept = false;
+
     private final int chapter_id;
 
     public Test(Integer id, String name, List<QuestionMultChoice> questionMultChoiceList, int chapter_id) {
@@ -24,6 +26,14 @@ public class Test implements Serializable {
         this.name = name;
         this.questionMultChoiceList = questionMultChoiceList;
         this.chapter_id = chapter_id;
+    }
+
+    public boolean isAccept() {
+        return accept;
+    }
+
+    public void setAccept(boolean accept) {
+        this.accept = accept;
     }
 
     public Integer getId() {

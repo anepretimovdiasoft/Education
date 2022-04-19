@@ -1,6 +1,7 @@
 package ru.stavopol.education.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 public class QuestionMultChoice implements Serializable {
@@ -9,21 +10,21 @@ public class QuestionMultChoice implements Serializable {
 
     private final String name;
 
-    private Map<String, Boolean> answerMap;
+    private List<AnswerMultChoice> answerMultChoiceList;
 
     private final int test_id;
 
 
-    public QuestionMultChoice(int id, String name, Map<String, Boolean> answerMap, int test_id) {
+    public QuestionMultChoice(int id, String name, List<AnswerMultChoice> answerMultChoiceList, int test_id) {
         this.id = id;
         this.name = name;
-        this.answerMap = answerMap;
+        this.answerMultChoiceList = answerMultChoiceList;
         this.test_id = test_id;
     }
 
-    public QuestionMultChoice(String name, Map<String, Boolean> answerMap, int test_id) {
+    public QuestionMultChoice(String name, List<AnswerMultChoice> answerMultChoiceList, int test_id) {
         this.name = name;
-        this.answerMap = answerMap;
+        this.answerMultChoiceList = answerMultChoiceList;
         this.test_id = test_id;
     }
 
@@ -39,7 +40,7 @@ public class QuestionMultChoice implements Serializable {
         return name;
     }
 
-    public Map<String, Boolean> getAnswerMap() {
-        return answerMap;
+    public List<AnswerMultChoice> getAnswerMultChoiceList() {
+        return answerMultChoiceList;
     }
 }

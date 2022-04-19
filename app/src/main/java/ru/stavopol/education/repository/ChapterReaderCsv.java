@@ -16,10 +16,11 @@ import java.util.List;
 import ru.stavopol.education.R;
 import ru.stavopol.education.model.Chapter;
 
-public class ChapterReaderCsv implements ChapterReader{
+public class ChapterReaderCsv implements ChapterReader {
 
     private final int rawResId;
     private final Context context;
+    private List<Chapter> chapterList = null;
 
     public ChapterReaderCsv(Context context, int rawResId) {
 
@@ -31,6 +32,9 @@ public class ChapterReaderCsv implements ChapterReader{
     @Override
     public List<Chapter> findAllChapter() {
 
+        if (chapterList != null)
+            return chapterList;
+
         List<Chapter> chapterList = new LinkedList<>();
 
         InputStream inputStream = context.getResources().openRawResource(rawResId);
@@ -40,8 +44,8 @@ public class ChapterReaderCsv implements ChapterReader{
 
         String line = "";
         Chapter chapter;
-        try{
-            while ( (line = bufferedReader.readLine()) != null) {
+        try {
+            while ((line = bufferedReader.readLine()) != null) {
 
                 String[] splitArray = line.split(";");
 
@@ -58,10 +62,11 @@ public class ChapterReaderCsv implements ChapterReader{
 
                 chapterList.add(chapter);
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
+        this.chapterList = chapterList;
         return chapterList;
     }
 }

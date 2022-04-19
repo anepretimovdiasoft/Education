@@ -20,6 +20,7 @@ public class TestReaderCsv implements TestReader {
 
     private final int rawResId;
     private final Context context;
+    private List<Test> testList = null;
 
     public TestReaderCsv(Context context, int rawResId) {
 
@@ -30,6 +31,9 @@ public class TestReaderCsv implements TestReader {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public List<Test> findAllTest() {
+
+        if (this.testList != null)
+            return testList;
 
         List<Test> testList = new LinkedList<>();
 
@@ -59,6 +63,7 @@ public class TestReaderCsv implements TestReader {
             e.printStackTrace();
         }
 
+        this.testList = testList;
         return testList;
     }
 }

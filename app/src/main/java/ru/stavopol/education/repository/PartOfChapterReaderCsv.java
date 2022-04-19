@@ -32,6 +32,9 @@ public class PartOfChapterReaderCsv implements PartOfChapterReader{
     @Override
     public List<PartOfChapter> findAllPartOfChapter() {
 
+        if (partOfChapterList != null)
+            return partOfChapterList;
+
         List<PartOfChapter> partOfChapterList = new LinkedList<>();
 
         InputStream inputStream = context.getResources().openRawResource(rawResId);

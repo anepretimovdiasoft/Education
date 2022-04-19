@@ -2,12 +2,9 @@ package ru.stavopol.education.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,13 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ru.stavopol.education.R;
-import ru.stavopol.education.activity.ChapterActivity;
-import ru.stavopol.education.model.Chapter;
 import ru.stavopol.education.model.PartOfChapter;
 
 public class AdapterPartOfChapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public static final String CHAPTER_NUMBER = "Chapter number";
     private LayoutInflater inflater;
     private List<PartOfChapter> partOfChapterList;
     private Context context;
@@ -67,12 +61,30 @@ public class AdapterPartOfChapter extends RecyclerView.Adapter<RecyclerView.View
 
         PartOfChapter partOfChapter = partOfChapterList.get(position);
 
-        int drawableTopResourceId = context.getResources().getIdentifier(partOfChapter.getBottomImage(), "drawable", context.getPackageName());
-        int drawableBotResourceId = context.getResources().getIdentifier(partOfChapter.getBottomImage(), "drawable", context.getPackageName());
-        ((MyViewHolder) holder).ivChapterImageTop.setImageDrawable(context.getDrawable(drawableTopResourceId));
-        ((MyViewHolder) holder).ivChapterImageBottom.setImageDrawable(context.getDrawable(drawableBotResourceId));
-        ((MyViewHolder) holder).tvChapterText.setText(partOfChapter.getChapterText());
+        if (!partOfChapter.getTopImage().equals("-1")) {
+            int drawableTopResourceId = context
+                    .getResources()
+                    .getIdentifier(
+                            partOfChapter.getTopImage(),
+                            "drawable",
+                            context.getPackageName()
+                    );
 
+            ((MyViewHolder) holder).ivChapterImageTop.setImageDrawable(context.getDrawable(drawableTopResourceId));
+        }
+
+        if (!partOfChapter.getBottomImage().equals("-1")) {
+            int drawableBotResourceId = context
+                    .getResources()
+                    .getIdentifier(
+                            partOfChapter.getBottomImage(),
+                            "drawable",
+                            context.getPackageName()
+                    );
+            ((MyViewHolder) holder).ivChapterImageBottom.setImageDrawable(context.getDrawable(drawableBotResourceId));
+        }
+
+        ((MyViewHolder) holder).tvChapterText.setText(partOfChapter.getChapterText());
     }
 
     @Override
