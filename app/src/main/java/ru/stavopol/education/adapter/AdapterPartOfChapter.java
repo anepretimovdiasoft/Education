@@ -2,6 +2,7 @@ package ru.stavopol.education.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ru.stavopol.education.R;
+import ru.stavopol.education.activity.WebViewActivity;
 import ru.stavopol.education.model.PartOfChapter;
 
 public class AdapterPartOfChapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -21,6 +23,7 @@ public class AdapterPartOfChapter extends RecyclerView.Adapter<RecyclerView.View
     private LayoutInflater inflater;
     private List<PartOfChapter> partOfChapterList;
     private Context context;
+    public static final String PART_LINK = "link";
 
     public AdapterPartOfChapter(Context context, List<PartOfChapter> partOfChapterList) {
 
@@ -34,6 +37,7 @@ public class AdapterPartOfChapter extends RecyclerView.Adapter<RecyclerView.View
         private final ImageView ivChapterImageTop;
         private final ImageView ivChapterImageBottom;
         private final TextView tvChapterText;
+        private final TextView tvChapterTitle;
 
         public MyViewHolder(@NonNull View itemView) {
 
@@ -42,6 +46,7 @@ public class AdapterPartOfChapter extends RecyclerView.Adapter<RecyclerView.View
             ivChapterImageTop = itemView.findViewById(R.id.iv_chapter_image_top);
             ivChapterImageBottom = itemView.findViewById(R.id.iv_chapter_image_bottom);
             tvChapterText = itemView.findViewById(R.id.tv_chapter_text);
+            tvChapterTitle = itemView.findViewById(R.id.tv_chapter_title);
         }
     }
 
@@ -84,7 +89,30 @@ public class AdapterPartOfChapter extends RecyclerView.Adapter<RecyclerView.View
             ((MyViewHolder) holder).ivChapterImageBottom.setImageDrawable(context.getDrawable(drawableBotResourceId));
         }
 
-        ((MyViewHolder) holder).tvChapterText.setText(partOfChapter.getChapterText());
+        if (!partOfChapter.getChapterText().equals("-1")) {
+
+            ((MyViewHolder) holder).tvChapterText.setText(partOfChapter.getChapterText());
+        }
+
+        if (!partOfChapter.getTitle().equals("-1")) {
+
+            ((MyViewHolder) holder).tvChapterTitle.setText(partOfChapter.getTitle());
+        }
+
+        if (!partOfChapter.getPart_link().equals("-1")) {
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(context, WebViewActivity.class);
+
+                    intent.putExtra(PART_LINK, partOfChapter.getPart_link());
+
+                    context.startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override

@@ -1,7 +1,6 @@
 package ru.stavopol.education.repository;
 
 import android.content.Context;
-import android.net.LinkAddress;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 
 import ru.stavopol.education.model.PartOfChapter;
 
-public class PartOfChapterReaderCsv implements PartOfChapterReader{
+public class PartOfChapterReaderCsv implements PartOfChapterReader {
 
     private final int rawResId;
     private final Context context;
@@ -44,8 +43,8 @@ public class PartOfChapterReaderCsv implements PartOfChapterReader{
 
         String line = "";
         PartOfChapter partOfChapter;
-        try{
-            while ( (line = bufferedReader.readLine()) != null) {
+        try {
+            while ((line = bufferedReader.readLine()) != null) {
 
                 String[] splitArray = line.split(";");
 
@@ -54,12 +53,14 @@ public class PartOfChapterReaderCsv implements PartOfChapterReader{
                         splitArray[1],
                         splitArray[2],
                         splitArray[3],
-                        Integer.parseInt(splitArray[5])
-                );
+                        "    " + splitArray[4],
+                        Integer.parseInt(splitArray[5]),
+                        Integer.parseInt(splitArray[6]),
+                        splitArray[7]);
 
                 partOfChapterList.add(partOfChapter);
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

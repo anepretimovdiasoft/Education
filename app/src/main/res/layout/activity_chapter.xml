@@ -12,9 +12,10 @@
         android:layout_height="wrap_content"
         android:text="@string/chapter_name"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:gravity="center"
         android:background="@color/main_color"
+        android:padding="6dp"
         />
 
     <androidx.recyclerview.widget.RecyclerView
