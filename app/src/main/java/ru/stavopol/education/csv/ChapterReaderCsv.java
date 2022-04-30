@@ -1,4 +1,4 @@
-package ru.stavopol.education.repository;
+package ru.stavopol.education.csv;
 
 import android.content.Context;
 import android.os.Build;
@@ -14,15 +14,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ru.stavopol.education.R;
-import ru.stavopol.education.model.Test;
+import ru.stavopol.education.model.Chapter;
 
-public class TestReaderCsv implements TestReader {
+public class ChapterReaderCsv implements ChapterReader {
 
     private final int rawResId;
     private final Context context;
-    private List<Test> testList = null;
+    private List<Chapter> chapterList = null;
 
-    public TestReaderCsv(Context context, int rawResId) {
+    public ChapterReaderCsv(Context context, int rawResId) {
 
         this.rawResId = rawResId;
         this.context = context;
@@ -30,12 +30,12 @@ public class TestReaderCsv implements TestReader {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public List<Test> findAllTest() {
+    public List<Chapter> findAllChapter() {
 
-        if (this.testList != null)
-            return testList;
+        if (chapterList != null)
+            return chapterList;
 
-        List<Test> testList = new LinkedList<>();
+        List<Chapter> chapterList = new LinkedList<>();
 
         InputStream inputStream = context.getResources().openRawResource(rawResId);
         BufferedReader bufferedReader = new BufferedReader(
@@ -43,27 +43,30 @@ public class TestReaderCsv implements TestReader {
         );
 
         String line = "";
-        Test test;
+        Chapter chapter;
         try {
             while ((line = bufferedReader.readLine()) != null) {
 
                 String[] splitArray = line.split(";");
 
-                test = new Test(
+                chapter = new Chapter(
                         Integer.parseInt(splitArray[0]),
                         splitArray[1],
-                        new QuestionMultChoiceReaderCsv(context, R.raw.question_mult_choice_data)
-                                .findQuestionMultChoiceTestId(Integer.parseInt(splitArray[0])),
-                        Integer.parseInt(splitArray[2])
+                        splitArray[2],
+                        new PartOfChapterReaderCsv(context, R.raw.part_of_chapter_data)
+                                .findPartOfChapterByChapterId(Integer.parseInt(splitArray[0])),
+                        false,
+                        false,
+                        null
                 );
 
-                testList.add(test);
+                chapterList.add(chapter);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        this.testList = testList;
-        return testList;
+        this.chapterList = chapterList;
+        return chapterList;
     }
 }

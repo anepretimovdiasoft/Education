@@ -1,6 +1,5 @@
 package ru.stavopol.education.fragment;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -15,11 +14,9 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import ru.stavopol.education.R;
-import ru.stavopol.education.adapter.AdapterChapter;
 import ru.stavopol.education.adapter.AdapterTest;
 import ru.stavopol.education.model.Test;
-import ru.stavopol.education.repository.ChapterReaderCsv;
-import ru.stavopol.education.repository.TestReaderCsv;
+import ru.stavopol.education.csv.TestReaderCsv;
 
 public class TestFragment extends Fragment {
 

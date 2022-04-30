@@ -17,7 +17,7 @@ import java.util.List;
 import ru.stavopol.education.R;
 import ru.stavopol.education.adapter.AdapterChapter;
 import ru.stavopol.education.model.Chapter;
-import ru.stavopol.education.repository.ChapterReaderCsv;
+import ru.stavopol.education.csv.ChapterReaderCsv;
 
 
 public class ChapterFragment extends Fragment {

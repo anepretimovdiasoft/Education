@@ -1,4 +1,4 @@
-package ru.stavopol.education.repository;
+package ru.stavopol.education.csv;
 
 import java.util.List;
 
