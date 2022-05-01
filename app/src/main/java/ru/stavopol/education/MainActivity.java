@@ -12,12 +12,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Objects;
 
+import ru.stavopol.education.dao.TransferCsvSqlite;
+import ru.stavopol.education.db.EducationDbOpenHelper;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        new TransferCsvSqlite(this, new EducationDbOpenHelper(this)).loadData();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_menu);
 

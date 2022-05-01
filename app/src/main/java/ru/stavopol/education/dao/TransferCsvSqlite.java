@@ -1,7 +1,11 @@
 package ru.stavopol.education.dao;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
+import java.util.List;
+
+import ru.stavopol.education.MainActivity;
 import ru.stavopol.education.R;
 import ru.stavopol.education.dao.csv.ChapterReader;
 import ru.stavopol.education.dao.csv.ChapterReaderCsv;
@@ -22,6 +26,11 @@ import ru.stavopol.education.dao.sqlite.QuestionMultChoiceReaderWriterSqlite;
 import ru.stavopol.education.dao.sqlite.TestReaderWriter;
 import ru.stavopol.education.dao.sqlite.TestReaderWriterSqlite;
 import ru.stavopol.education.db.EducationDbOpenHelper;
+import ru.stavopol.education.model.AnswerMultChoice;
+import ru.stavopol.education.model.Chapter;
+import ru.stavopol.education.model.PartOfChapter;
+import ru.stavopol.education.model.QuestionMultChoice;
+import ru.stavopol.education.model.Test;
 
 public class TransferCsvSqlite {
 
@@ -36,6 +45,8 @@ public class TransferCsvSqlite {
     private final AnswerMultChoiceReaderWriter answerMultChoiceReaderWriter;
     private final TestReaderWriter testReaderWriter;
 
+    private final Context context;
+
     public TransferCsvSqlite(Context context, EducationDbOpenHelper openHelper){
 
         this.chapterReader = new ChapterReaderCsv(context, R.raw.chapter_data);
@@ -48,8 +59,47 @@ public class TransferCsvSqlite {
         this.questionMultChoiceReaderWriter = new QuestionMultChoiceReaderWriterSqlite(openHelper);
         this.answerMultChoiceReaderWriter = new AnswerMultChoiceReaderWriterSqlite(openHelper);
         this.testReaderWriter = new TestReaderWriterSqlite(openHelper);
+
+        this.context = context;
     }
 
 
+    public void loadData(){
+
+        SharedPreferences sharedPreferences = ((MainActivity)context)
+                .getPreferences(Context.MODE_PRIVATE);
+
+        boolean data = sharedPreferences.getBoolean("DATA", false);
+        if (!data){
+
+            List<Chapter> chapterList = chapterReader.findAll();
+            List<PartOfChapter> partOfChapterList = partOfChapterReader.findAll();
+            List<Test> testList = testReader.findAll();
+            List<QuestionMultChoice> questionMultChoiceList = questionMultChoiceReader.findAll();
+
+
+            for (Chapter chapter : chapterList) {
+                chapterReaderWriter.insert(chapter);
+            }
+            for (PartOfChapter partOfChapter : partOfChapterList) {
+                partOfChapterReaderWriter.insert(partOfChapter);
+            }
+            for (Test test : testList) {
+                testReaderWriter.insert(test);
+            }
+            for (QuestionMultChoice questionMultChoice : questionMultChoiceList) {
+                questionMultChoiceReaderWriter.insert(questionMultChoice);
+                for (AnswerMultChoice answerMultChoice : questionMultChoice.getAnswerMultChoiceList()) {
+                    answerMultChoiceReaderWriter.insert(answerMultChoice);
+                }
+            }
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            editor.putBoolean("DATA", true);
+            editor.commit();
+        }
+
+    }
 
 }

@@ -46,26 +46,32 @@ public class QuestionMultChoiceReaderCsv implements QuestionMultChoiceReader {
         String line = "";
         QuestionMultChoice questionMultChoice;
         try {
+            int idCounter = 1;
             while ((line = bufferedReader.readLine()) != null) {
                 List<AnswerMultChoice> answerMultChoiceList = new LinkedList<>();
                 String[] splitArray = line.split(";");
 
+
                 for (int i = 3; i < splitArray.length; i++) {
                     if (splitArray[i].charAt(splitArray[i].length() - 1) == 't')
                         answerMultChoiceList.add(new AnswerMultChoice(
+                                idCounter,
                                 splitArray[i].substring(0, splitArray[i].length() - 1),
                                 true,
                                 Integer.parseInt(splitArray[0])
                         ));
                     else
                         answerMultChoiceList.add(new AnswerMultChoice(
+                                idCounter,
                                 splitArray[i].substring(0, splitArray[i].length() - 1),
                                 false,
                                 Integer.parseInt(splitArray[0])
                         ));
+                    idCounter++;
                 }
 
                 questionMultChoice = new QuestionMultChoice(
+                        Integer.parseInt(splitArray[0]),
                         splitArray[2],
                         answerMultChoiceList,
                         Integer.parseInt(splitArray[1])
