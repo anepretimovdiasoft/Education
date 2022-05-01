@@ -1,4 +1,4 @@
-package ru.stavopol.education.dao;
+package ru.stavopol.education.dao.sqlite;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -11,11 +11,11 @@ import ru.stavopol.education.db.EducationDbOpenHelper;
 import ru.stavopol.education.db.EducationReaderContract;
 import ru.stavopol.education.model.PartOfChapter;
 
-public class PartOfChapterDaoSqlite implements PartOfChapterDao {
+public class PartOfChapterReaderWriterSqlite implements PartOfChapterReaderWriter {
 
     private final EducationDbOpenHelper openHelper;
 
-    public PartOfChapterDaoSqlite(EducationDbOpenHelper openHelper) {
+    public PartOfChapterReaderWriterSqlite(EducationDbOpenHelper openHelper) {
 
         this.openHelper = openHelper;
     }
@@ -70,6 +70,62 @@ public class PartOfChapterDaoSqlite implements PartOfChapterDao {
                 null,
                 null,
                 null,
+                null
+        );
+
+        List<PartOfChapter> partOfChapterList = new LinkedList<>();
+
+        if (cursor.moveToFirst()) {
+
+            int columnIndexId = cursor
+                    .getColumnIndex(EducationReaderContract.PartOfChapterEntry.COLUMN_ID);
+            int columnIndexTitle = cursor
+                    .getColumnIndex(EducationReaderContract.PartOfChapterEntry.COLUMN_TITLE);
+            int columnIndexTopImage = cursor
+                    .getColumnIndex(EducationReaderContract.PartOfChapterEntry.COLUMN_TOP_IMAGE);
+            int columnIndexChapterText = cursor
+                    .getColumnIndex(EducationReaderContract.PartOfChapterEntry.COLUMN_CHAPTER_TEXT);
+            int columnIndexBottomIndex = cursor
+                    .getColumnIndex(EducationReaderContract.PartOfChapterEntry.COLUMN_BOTTOM_IMAGE);
+            int columnIndexPartLink = cursor
+                    .getColumnIndex(EducationReaderContract.PartOfChapterEntry.COLUMN_PART_LINK);
+            int columnIndexPartNumber = cursor
+                    .getColumnIndex(EducationReaderContract.PartOfChapterEntry.COLUMN_PART_NUMBER);
+            int columnIndexChapterId = cursor
+                    .getColumnIndex(EducationReaderContract.PartOfChapterEntry.COLUMN_CHAPTER_ID);
+
+            do {
+
+                PartOfChapter partOfChapter = new PartOfChapter(
+                        cursor.getInt(columnIndexId),
+                        cursor.getString(columnIndexTitle),
+                        cursor.getString(columnIndexTopImage),
+                        cursor.getString(columnIndexBottomIndex),
+                        cursor.getString(columnIndexChapterText),
+                        cursor.getInt(columnIndexPartNumber),
+                        cursor.getInt(columnIndexChapterId),
+                        cursor.getString(columnIndexPartLink)
+                );
+
+                partOfChapterList.add(partOfChapter);
+            } while (cursor.moveToNext());
+
+        }
+
+        return partOfChapterList;
+    }
+
+    @Override
+    public List<PartOfChapter> findByChapterId(int id) {
+
+        SQLiteDatabase readableDatabase = openHelper.getReadableDatabase();
+
+        Cursor cursor = readableDatabase.query(
+                EducationReaderContract.PartOfChapterEntry.TABLE_NAME,
+                null,
+                EducationReaderContract.PartOfChapterEntry.COLUMN_ID + " = ?",
+                new String[]{String.valueOf(id)},
+                null,
                 null,
                 null
         );
@@ -98,14 +154,14 @@ public class PartOfChapterDaoSqlite implements PartOfChapterDao {
             do {
 
                 PartOfChapter partOfChapter = new PartOfChapter(
-                  cursor.getInt(columnIndexId),
-                  cursor.getString(columnIndexTitle),
-                  cursor.getString(columnIndexTopImage),
-                  cursor.getString(columnIndexBottomIndex),
-                  cursor.getString(columnIndexChapterText),
-                  cursor.getInt(columnIndexPartNumber),
-                  cursor.getInt(columnIndexChapterId),
-                  cursor.getString(columnIndexPartLink)
+                        cursor.getInt(columnIndexId),
+                        cursor.getString(columnIndexTitle),
+                        cursor.getString(columnIndexTopImage),
+                        cursor.getString(columnIndexBottomIndex),
+                        cursor.getString(columnIndexChapterText),
+                        cursor.getInt(columnIndexPartNumber),
+                        cursor.getInt(columnIndexChapterId),
+                        cursor.getString(columnIndexPartLink)
                 );
 
                 partOfChapterList.add(partOfChapter);

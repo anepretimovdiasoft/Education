@@ -1,4 +1,4 @@
-package ru.stavopol.education.csv;
+package ru.stavopol.education.dao.csv;
 
 import android.content.Context;
 import android.os.Build;
@@ -31,7 +31,7 @@ public class QuestionMultChoiceReaderCsv implements QuestionMultChoiceReader {
 
 
     @Override
-    public List<QuestionMultChoice> findAllQuestionMultChoice() {
+    public List<QuestionMultChoice> findAll() {
 
         if (questionMultChoiceList != null)
             return  questionMultChoiceList;
@@ -83,10 +83,10 @@ public class QuestionMultChoiceReaderCsv implements QuestionMultChoiceReader {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public List<QuestionMultChoice> findQuestionMultChoiceTestId(int id) {
+    public List<QuestionMultChoice> findByTestId(int id) {
 
         if (questionMultChoiceList == null)
-            questionMultChoiceList = findAllQuestionMultChoice();
+            questionMultChoiceList = findAll();
 
         return questionMultChoiceList.stream()
                 .filter(questionMultChoice -> questionMultChoice.getTest_id() == id)

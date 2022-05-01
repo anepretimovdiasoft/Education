@@ -1,4 +1,4 @@
-package ru.stavopol.education.csv;
+package ru.stavopol.education.dao.csv;
 
 import android.content.Context;
 import android.os.Build;
@@ -29,7 +29,7 @@ public class PartOfChapterReaderCsv implements PartOfChapterReader {
     }
 
     @Override
-    public List<PartOfChapter> findAllPartOfChapter() {
+    public List<PartOfChapter> findAll() {
 
         if (partOfChapterList != null)
             return partOfChapterList;
@@ -70,10 +70,10 @@ public class PartOfChapterReaderCsv implements PartOfChapterReader {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public List<PartOfChapter> findPartOfChapterByChapterId(int id) {
+    public List<PartOfChapter> findByChapterId(int id) {
 
         if (partOfChapterList == null)
-            partOfChapterList = findAllPartOfChapter();
+            partOfChapterList = findAll();
 
         return partOfChapterList.stream()
                 .filter(partOfChapter -> partOfChapter.getChapter_id() == id)

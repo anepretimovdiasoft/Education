@@ -17,7 +17,7 @@ import java.util.List;
 import ru.stavopol.education.R;
 import ru.stavopol.education.adapter.AdapterChapter;
 import ru.stavopol.education.model.Chapter;
-import ru.stavopol.education.csv.ChapterReaderCsv;
+import ru.stavopol.education.dao.csv.ChapterReaderCsv;
 
 
 public class ChapterFragment extends Fragment {
@@ -31,7 +31,7 @@ public class ChapterFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chapter, container, false);
 
-        chapterList = new ChapterReaderCsv(getContext(), R.raw.chapter_data).findAllChapter();
+        chapterList = new ChapterReaderCsv(getContext(), R.raw.chapter_data).findAll();
         RecyclerView rvChapter = view.findViewById(R.id.rv_course);
         AdapterChapter adapterChapter = new AdapterChapter(getContext(), chapterList);
         rvChapter.setAdapter(adapterChapter);

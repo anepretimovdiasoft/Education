@@ -1,4 +1,4 @@
-package ru.stavopol.education.csv;
+package ru.stavopol.education.dao.csv;
 
 import android.content.Context;
 import android.os.Build;
@@ -30,7 +30,7 @@ public class TestReaderCsv implements TestReader {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public List<Test> findAllTest() {
+    public List<Test> findAll() {
 
         if (this.testList != null)
             return testList;
@@ -53,7 +53,7 @@ public class TestReaderCsv implements TestReader {
                         Integer.parseInt(splitArray[0]),
                         splitArray[1],
                         new QuestionMultChoiceReaderCsv(context, R.raw.question_mult_choice_data)
-                                .findQuestionMultChoiceTestId(Integer.parseInt(splitArray[0])),
+                                .findByTestId(Integer.parseInt(splitArray[0])),
                         Integer.parseInt(splitArray[2])
                 );
 

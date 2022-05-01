@@ -16,7 +16,7 @@ import java.util.List;
 import ru.stavopol.education.R;
 import ru.stavopol.education.adapter.AdapterTest;
 import ru.stavopol.education.model.Test;
-import ru.stavopol.education.csv.TestReaderCsv;
+import ru.stavopol.education.dao.csv.TestReaderCsv;
 
 public class TestFragment extends Fragment {
 
@@ -27,7 +27,7 @@ public class TestFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_test, container, false);
 
-        List<Test> allTest = new TestReaderCsv(getContext(), R.raw.test_data).findAllTest();
+        List<Test> allTest = new TestReaderCsv(getContext(), R.raw.test_data).findAll();
 
         RecyclerView rvTest = view.findViewById(R.id.rv_test);
         AdapterTest adapterTest = new AdapterTest(getContext(), allTest);
