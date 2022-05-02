@@ -61,8 +61,8 @@ public class ChapterReaderWriterSqlite implements ChapterReaderWriter {
                         cursor.getString(columnIndexDescription),
                         new PartOfChapterReaderWriterSqlite(openHelper)
                                 .findByChapterId(cursor.getInt(columnIndexId)),
-                        Boolean.parseBoolean(cursor.getString(columnIndexChecked)),
-                        Boolean.parseBoolean(cursor.getString(columnIndexAccepted)),
+                        cursor.getInt(columnIndexChecked) == 1,
+                        cursor.getInt(columnIndexAccepted) == 1,
                         new TestReaderWriterSqlite(openHelper)
                                 .findAll()
                         .stream()

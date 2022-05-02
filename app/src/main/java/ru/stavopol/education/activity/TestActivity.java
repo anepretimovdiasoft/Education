@@ -13,6 +13,7 @@ import ru.stavopol.education.model.Test;
 public class TestActivity extends AppCompatActivity {
 
     private ViewPager2 vpQuestion;
+    private  AdapterQuestionPager adapterQuestionPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,18 @@ public class TestActivity extends AppCompatActivity {
         Test test = (Test) getIntent().getSerializableExtra(AdapterTest.CHAPTER_NUMBER);
 
         vpQuestion = findViewById(R.id.vp_question);
-        vpQuestion.setAdapter(new AdapterQuestionPager(this, test.getQuestionMultChoiceList()));
+        adapterQuestionPager = new AdapterQuestionPager(
+                this,
+                test.getQuestionMultChoiceList(),
+                test
+        );
+        vpQuestion.setAdapter(adapterQuestionPager);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapterQuestionPager.notifyDataSetChanged();
     }
 }

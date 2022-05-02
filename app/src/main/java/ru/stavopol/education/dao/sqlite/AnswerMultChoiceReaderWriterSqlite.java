@@ -11,7 +11,7 @@ import ru.stavopol.education.db.EducationDbOpenHelper;
 import ru.stavopol.education.db.EducationReaderContract;
 import ru.stavopol.education.model.AnswerMultChoice;
 
-public class AnswerMultChoiceReaderWriterSqlite implements AnswerMultChoiceReaderWriter{
+public class AnswerMultChoiceReaderWriterSqlite implements AnswerMultChoiceReaderWriter {
 
     private final EducationDbOpenHelper openHelper;
 
@@ -79,7 +79,7 @@ public class AnswerMultChoiceReaderWriterSqlite implements AnswerMultChoiceReade
                 AnswerMultChoice answerMultChoice = new AnswerMultChoice(
                         cursor.getInt(columnIndexId),
                         cursor.getString(columnIndexName),
-                        Boolean.parseBoolean(cursor.getString(columnIndexRight)),
+                        cursor.getInt(columnIndexRight) == 1,
                         cursor.getInt(columnIndexQuestionId)
                 );
 
@@ -92,14 +92,14 @@ public class AnswerMultChoiceReaderWriterSqlite implements AnswerMultChoiceReade
     }
 
     @Override
-    public List<AnswerMultChoice> findByTestId(int id) {
+    public List<AnswerMultChoice> findByQuestionId(int id) {
 
         SQLiteDatabase readableDatabase = openHelper.getReadableDatabase();
 
         Cursor cursor = readableDatabase.query(
                 EducationReaderContract.AnswerMultChoiceEntry.TABLE_NAME,
                 null,
-                EducationReaderContract.AnswerMultChoiceEntry.COLUMN_ID + " = ?",
+                EducationReaderContract.AnswerMultChoiceEntry.COLUMN_QUESTION_ID + " = ?",
                 new String[]{String.valueOf(id)},
                 null,
                 null,
@@ -124,7 +124,7 @@ public class AnswerMultChoiceReaderWriterSqlite implements AnswerMultChoiceReade
                 AnswerMultChoice answerMultChoice = new AnswerMultChoice(
                         cursor.getInt(columnIndexId),
                         cursor.getString(columnIndexName),
-                        Boolean.parseBoolean(cursor.getString(columnIndexRight)),
+                        cursor.getInt(columnIndexRight) == 1,
                         cursor.getInt(columnIndexQuestionId)
                 );
 

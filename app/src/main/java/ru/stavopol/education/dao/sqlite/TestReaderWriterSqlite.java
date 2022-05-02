@@ -58,7 +58,7 @@ public class TestReaderWriterSqlite implements TestReaderWriter {
                 );
 
                 test.setAccept(
-                        Boolean.parseBoolean(cursor.getString(columnIndexAccept))
+                        cursor.getInt(columnIndexAccept) == 1
                 );
 
                 testList.add(test);

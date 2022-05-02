@@ -20,23 +20,32 @@ import java.util.List;
 import ru.stavopol.education.R;
 import ru.stavopol.education.activity.ChapterActivity;
 import ru.stavopol.education.activity.TestActivity;
+import ru.stavopol.education.dao.sqlite.TestReaderWriterSqlite;
+import ru.stavopol.education.db.EducationDbOpenHelper;
 import ru.stavopol.education.model.Chapter;
 import ru.stavopol.education.model.QuestionMultChoice;
+import ru.stavopol.education.model.Test;
 
 public class AdapterQuestionPager extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater inflater;
     private final List<QuestionMultChoice> questionMultChoiceList;
     private Context context;
+    private final Test test;
 
     private int countEnter = 0;
     private int countRightQuestion = 0;
 
-    public AdapterQuestionPager(Context context, List<QuestionMultChoice> questionMultChoiceList) {
+    public AdapterQuestionPager(
+            Context context,
+            List<QuestionMultChoice> questionMultChoiceList,
+            Test test
+    ) {
 
         this.inflater = LayoutInflater.from(context);
         this.questionMultChoiceList = questionMultChoiceList;
         this.context = context;
+        this.test = test;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -89,9 +98,12 @@ public class AdapterQuestionPager extends RecyclerView.Adapter<RecyclerView.View
                 countEnter++;
                 view.setClickable(false);
                 if (countEnter == questionMultChoiceList.size()) {
-                    if (countEnter == countRightQuestion)
+                    if (countEnter == countRightQuestion) {
                         Toast.makeText(context, "Тест пройден", Toast.LENGTH_SHORT).show();
-                    else
+                        new TestReaderWriterSqlite(new EducationDbOpenHelper(context))
+                                .update(test.getId(), true);
+                        test.setAccept(true);
+                    } else
                         Toast.makeText(context, "Тест не пройден", Toast.LENGTH_SHORT).show();
                     ((TestActivity) context).finish();
                 }

@@ -123,7 +123,7 @@ public class PartOfChapterReaderWriterSqlite implements PartOfChapterReaderWrite
         Cursor cursor = readableDatabase.query(
                 EducationReaderContract.PartOfChapterEntry.TABLE_NAME,
                 null,
-                EducationReaderContract.PartOfChapterEntry.COLUMN_ID + " = ?",
+                EducationReaderContract.PartOfChapterEntry.COLUMN_CHAPTER_ID + " = ?",
                 new String[]{String.valueOf(id)},
                 null,
                 null,

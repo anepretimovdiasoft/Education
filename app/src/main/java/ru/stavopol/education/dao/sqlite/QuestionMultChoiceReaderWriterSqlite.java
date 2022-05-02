@@ -50,7 +50,7 @@ public class QuestionMultChoiceReaderWriterSqlite implements QuestionMultChoiceR
                 QuestionMultChoice questionMultChoice = new QuestionMultChoice(
                         cursor.getInt(columnIndexId),
                         cursor.getString(columnIndexName),
-                        new AnswerMultChoiceReaderWriterSqlite(openHelper).findByTestId(
+                        new AnswerMultChoiceReaderWriterSqlite(openHelper).findByQuestionId(
                                 cursor.getInt(columnIndexId)
                         ),
                         cursor.getInt(columnIndexTestId)
@@ -72,7 +72,7 @@ public class QuestionMultChoiceReaderWriterSqlite implements QuestionMultChoiceR
         Cursor cursor = readableDatabase.query(
                 EducationReaderContract.QuestionMultChoiceEntry.TABLE_NAME,
                 null,
-                EducationReaderContract.QuestionMultChoiceEntry.COLUMN_ID + " = ?",
+                EducationReaderContract.QuestionMultChoiceEntry.COLUMN_TEST_ID + " = ?",
                 new String[]{String.valueOf(id)},
                 null,
                 null,
@@ -95,7 +95,7 @@ public class QuestionMultChoiceReaderWriterSqlite implements QuestionMultChoiceR
                 QuestionMultChoice questionMultChoice = new QuestionMultChoice(
                         cursor.getInt(columnIndexId),
                         cursor.getString(columnIndexName),
-                        new AnswerMultChoiceReaderWriterSqlite(openHelper).findByTestId(
+                        new AnswerMultChoiceReaderWriterSqlite(openHelper).findByQuestionId(
                                 cursor.getInt(columnIndexId)
                         ),
                         cursor.getInt(columnIndexTestId)

@@ -3,6 +3,7 @@ package ru.stavopol.education.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,9 @@ public class AdapterTest extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ((MyViewHolder) holder).tvTestName.setText(test.getName());
         ((MyViewHolder) holder).cbTest.setChecked(test.isAccept());
 
+        if (test.isAccept()){
+            holder.itemView.setBackgroundColor(Color.GREEN);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

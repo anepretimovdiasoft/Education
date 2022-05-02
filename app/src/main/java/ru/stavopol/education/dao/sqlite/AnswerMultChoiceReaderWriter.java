@@ -10,6 +10,6 @@ public interface AnswerMultChoiceReaderWriter {
 
     List<AnswerMultChoice> findAll();
 
-    List<AnswerMultChoice> findByTestId(int id);
+    List<AnswerMultChoice> findByQuestionId(int id);
 
 }
