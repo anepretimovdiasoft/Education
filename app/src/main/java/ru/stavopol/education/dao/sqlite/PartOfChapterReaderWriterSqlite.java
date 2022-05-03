@@ -112,6 +112,7 @@ public class PartOfChapterReaderWriterSqlite implements PartOfChapterReaderWrite
 
         }
 
+        cursor.close();
         return partOfChapterList;
     }
 
@@ -169,6 +170,7 @@ public class PartOfChapterReaderWriterSqlite implements PartOfChapterReaderWrite
 
         }
 
+        cursor.close();
         return partOfChapterList;
     }
 }

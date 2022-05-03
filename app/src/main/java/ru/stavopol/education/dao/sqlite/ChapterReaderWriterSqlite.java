@@ -76,6 +76,7 @@ public class ChapterReaderWriterSqlite implements ChapterReaderWriter {
 
         }
 
+        cursor.close();
         return chapterList;
     }
 

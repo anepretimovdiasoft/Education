@@ -17,6 +17,9 @@ import java.util.List;
 
 import ru.stavopol.education.R;
 import ru.stavopol.education.activity.ChapterActivity;
+import ru.stavopol.education.dao.sqlite.ChapterReaderWriterSqlite;
+import ru.stavopol.education.dao.sqlite.TestReaderWriterSqlite;
+import ru.stavopol.education.db.EducationDbOpenHelper;
 import ru.stavopol.education.model.Chapter;
 
 public class AdapterChapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -69,9 +72,22 @@ public class AdapterChapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ((MyViewHolder) holder).cbChapter.setChecked(chapter.isChecked());
         ((MyViewHolder) holder).tvChapterDiscription.setText(chapter.getDescription());
 
-        if (chapter.isChecked() && chapter.isAccepted()){
-            holder.itemView.setBackgroundColor(Color.GREEN);
-        }
+        ((MyViewHolder) holder).cbChapter.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        chapter.setChecked(((CheckBox)view).isChecked());
+                        new ChapterReaderWriterSqlite(
+                                new EducationDbOpenHelper(context))
+                                .update(
+                                        chapter.getId(),
+                                        chapter.isChecked(),
+                                        chapter.getTest().isAccept()
+                                );
+                        AdapterChapter.this.notifyDataSetChanged();
+                    }
+                }
+        );
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

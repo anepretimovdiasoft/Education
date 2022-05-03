@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ import ru.stavopol.education.dao.csv.ChapterReaderCsv;
 public class ChapterFragment extends Fragment {
 
     private List<Chapter> chapterList = new ArrayList<>();
+    private AdapterChapter adapterChapter;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -35,9 +37,10 @@ public class ChapterFragment extends Fragment {
 
         chapterList = new ChapterReaderWriterSqlite(new EducationDbOpenHelper(getContext())).findAll();
         RecyclerView rvChapter = view.findViewById(R.id.rv_course);
-        AdapterChapter adapterChapter = new AdapterChapter(getContext(), chapterList);
+        adapterChapter = new AdapterChapter(getContext(), chapterList);
         rvChapter.setAdapter(adapterChapter);
 
         return view;
     }
+
 }

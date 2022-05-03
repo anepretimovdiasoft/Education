@@ -66,6 +66,7 @@ public class TestReaderWriterSqlite implements TestReaderWriter {
 
         }
 
+        cursor.close();
         return testList;
     }
 

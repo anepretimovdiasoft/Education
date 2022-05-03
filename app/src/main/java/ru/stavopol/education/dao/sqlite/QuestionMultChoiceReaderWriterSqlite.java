@@ -61,6 +61,7 @@ public class QuestionMultChoiceReaderWriterSqlite implements QuestionMultChoiceR
 
         }
 
+        cursor.close();
         return questionMultChoiceList;
     }
 
@@ -106,6 +107,7 @@ public class QuestionMultChoiceReaderWriterSqlite implements QuestionMultChoiceR
 
         }
 
+        cursor.close();
         return questionMultChoiceList;
     }
 

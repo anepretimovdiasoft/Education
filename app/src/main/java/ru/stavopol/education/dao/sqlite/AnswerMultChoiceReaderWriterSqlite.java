@@ -88,6 +88,7 @@ public class AnswerMultChoiceReaderWriterSqlite implements AnswerMultChoiceReade
 
         }
 
+        cursor.close();
         return answerMultChoiceList;
     }
 
@@ -133,6 +134,7 @@ public class AnswerMultChoiceReaderWriterSqlite implements AnswerMultChoiceReade
 
         }
 
+        cursor.close();
         return answerMultChoiceList;
     }
 }

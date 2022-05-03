@@ -13,10 +13,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.List;
 
 import ru.stavopol.education.R;
 import ru.stavopol.education.activity.TestActivity;
+import ru.stavopol.education.dao.sqlite.TestReaderWriterSqlite;
+import ru.stavopol.education.db.EducationDbOpenHelper;
 import ru.stavopol.education.model.Test;
 
 public class AdapterTest extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -66,9 +69,23 @@ public class AdapterTest extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ((MyViewHolder) holder).tvTestName.setText(test.getName());
         ((MyViewHolder) holder).cbTest.setChecked(test.isAccept());
 
-        if (test.isAccept()){
+        /*if (test.isAccept()){
             holder.itemView.setBackgroundColor(Color.GREEN);
-        }
+        }*/
+
+        ((MyViewHolder) holder).cbTest.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        test.setAccept(((CheckBox)view).isChecked());
+                        new TestReaderWriterSqlite(
+                                new EducationDbOpenHelper(context))
+                                .update(test.getId(), test.isAccept()
+                                );
+                        AdapterTest.this.notifyDataSetChanged();
+                    }
+                }
+        );
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

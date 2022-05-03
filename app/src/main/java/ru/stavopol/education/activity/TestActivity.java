@@ -3,6 +3,7 @@ package ru.stavopol.education.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import ru.stavopol.education.R;
@@ -36,5 +37,10 @@ public class TestActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         adapterQuestionPager.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
