@@ -3,7 +3,8 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
 
     <TextView
@@ -11,10 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/chapter_name"
+        android:fontFamily="sans-serif-medium"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:gravity="center"
-        android:background="@color/main_color"
+        android:background="@drawable/ic_top_part"
         android:padding="6dp"
         />
 

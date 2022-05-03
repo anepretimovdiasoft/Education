@@ -109,8 +109,9 @@ public class AdapterQuestionPager extends RecyclerView.Adapter<RecyclerView.View
                 if (countEnter == size) {
                     if (countEnter == countRightQuestion) {
                         Toast.makeText(context, "Тест пройден", Toast.LENGTH_LONG).show();
-                    } else
+                    } else {
                         Toast.makeText(context, "Тест не пройден", Toast.LENGTH_LONG).show();
+                    }
                     ((TestActivity) context).finish();
                 }
                 questionMultChoiceList.remove(position);
