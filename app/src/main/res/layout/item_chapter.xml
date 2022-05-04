@@ -1,46 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_margin="12dp">
-
-    <CheckBox
-        android:id="@+id/cb_chapter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"/>
+    android:layout_margin="12dp"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_chapter_name"
+
+        <CheckBox
+            android:id="@+id/cb_chapter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="Название главы"
-            android:textColor="@color/black"
-            android:layout_gravity="center"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_chapter_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="Краткое описание главы"
-            android:textColor="@color/black"
-            android:layout_gravity="center"
-            android:fontFamily="sans-serif-medium"
-            android:justificationMode="inter_word"
-            android:gravity="center"/>
+            <TextView
+                android:id="@+id/tv_chapter_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="Название главы"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_chapter_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:justificationMode="inter_word"
+                android:text="Краткое описание главы"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#7ad6ca"/>
 
 </LinearLayout>

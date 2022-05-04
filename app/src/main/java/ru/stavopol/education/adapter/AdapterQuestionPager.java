@@ -52,6 +52,7 @@ public class AdapterQuestionPager extends RecyclerView.Adapter<RecyclerView.View
         this.questionMultChoiceList = questionMultChoiceList;
         this.context = context;
         this.test = test;
+        size = questionMultChoiceList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -67,7 +68,7 @@ public class AdapterQuestionPager extends RecyclerView.Adapter<RecyclerView.View
             btnEnter = itemView.findViewById(R.id.btn_enter);
             rvAnswer = itemView.findViewById(R.id.rv_answer);
             tvQuestionName = itemView.findViewById(R.id.tv_question_name);
-            size = questionMultChoiceList.size();
+
         }
     }
 
