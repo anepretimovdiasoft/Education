@@ -76,6 +76,9 @@ public class AdapterPartOfChapter extends RecyclerView.Adapter<RecyclerView.View
                     );
 
             ((MyViewHolder) holder).ivChapterImageTop.setImageDrawable(context.getDrawable(drawableTopResourceId));
+        }else {
+
+            ((MyViewHolder) holder).ivChapterImageTop.setVisibility(View.GONE);
         }
 
         if (!partOfChapter.getBottomImage().equals("-1")) {
@@ -87,16 +90,25 @@ public class AdapterPartOfChapter extends RecyclerView.Adapter<RecyclerView.View
                             context.getPackageName()
                     );
             ((MyViewHolder) holder).ivChapterImageBottom.setImageDrawable(context.getDrawable(drawableBotResourceId));
+        }else {
+
+            ((MyViewHolder) holder).ivChapterImageBottom.setVisibility(View.GONE);
         }
 
         if (!partOfChapter.getChapterText().equals("-1")) {
 
             ((MyViewHolder) holder).tvChapterText.setText(partOfChapter.getChapterText());
+        }else {
+
+            ((MyViewHolder) holder).tvChapterText.setVisibility(View.GONE);
         }
 
         if (!partOfChapter.getTitle().equals("-1")) {
 
             ((MyViewHolder) holder).tvChapterTitle.setText(partOfChapter.getTitle());
+        }else{
+
+            ((MyViewHolder) holder).tvChapterTitle.setVisibility(View.GONE);
         }
 
         if (!partOfChapter.getPart_link().equals("-1")) {
@@ -113,6 +125,7 @@ public class AdapterPartOfChapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
         }
+
     }
 
     @Override
