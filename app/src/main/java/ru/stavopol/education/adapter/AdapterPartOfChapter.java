@@ -76,10 +76,11 @@ public class AdapterPartOfChapter extends RecyclerView.Adapter<RecyclerView.View
                     );
 
             ((MyViewHolder) holder).ivChapterImageTop.setImageDrawable(context.getDrawable(drawableTopResourceId));
-        }/*else {
+            ((MyViewHolder) holder).ivChapterImageTop.setVisibility(View.VISIBLE);
+        }else {
 
             ((MyViewHolder) holder).ivChapterImageTop.setVisibility(View.GONE);
-        }*/
+        }
 
         if (!partOfChapter.getBottomImage().equals("-1")) {
             int drawableBotResourceId = context
@@ -90,29 +91,33 @@ public class AdapterPartOfChapter extends RecyclerView.Adapter<RecyclerView.View
                             context.getPackageName()
                     );
             ((MyViewHolder) holder).ivChapterImageBottom.setImageDrawable(context.getDrawable(drawableBotResourceId));
-        }/*else {
+            ((MyViewHolder) holder).ivChapterImageBottom.setVisibility(View.VISIBLE);
+        }else {
 
             ((MyViewHolder) holder).ivChapterImageBottom.setVisibility(View.GONE);
-        }*/
+        }
 
         if (!partOfChapter.getChapterText().equals("-1")) {
 
             ((MyViewHolder) holder).tvChapterText.setText(partOfChapter.getChapterText());
-        }/*else {
+            ((MyViewHolder) holder).tvChapterText.setVisibility(View.VISIBLE);
+        }else {
 
             ((MyViewHolder) holder).tvChapterText.setVisibility(View.GONE);
-        }*/
+        }
 
         if (!partOfChapter.getTitle().equals("-1")) {
 
             ((MyViewHolder) holder).tvChapterTitle.setText(partOfChapter.getTitle());
-        }/*else{
+            ((MyViewHolder) holder).tvChapterTitle.setVisibility(View.VISIBLE);
+        }else{
 
             ((MyViewHolder) holder).tvChapterTitle.setVisibility(View.GONE);
-        }*/
+        }
 
         if (!partOfChapter.getPart_link().equals("-1")) {
 
+            holder.itemView.setClickable(true);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -124,6 +129,8 @@ public class AdapterPartOfChapter extends RecyclerView.Adapter<RecyclerView.View
                     context.startActivity(intent);
                 }
             });
+        }else {
+            holder.itemView.setClickable(false);
         }
 
     }
