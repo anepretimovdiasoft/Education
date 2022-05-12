@@ -3,7 +3,6 @@ package ru.stavopol.education.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import java.util.List;
 import ru.stavopol.education.R;
 import ru.stavopol.education.activity.ChapterActivity;
 import ru.stavopol.education.dao.sqlite.ChapterReaderWriterSqlite;
-import ru.stavopol.education.dao.sqlite.TestReaderWriterSqlite;
 import ru.stavopol.education.db.EducationDbOpenHelper;
 import ru.stavopol.education.model.Chapter;
 
@@ -39,7 +37,7 @@ public class AdapterChapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView tvChapterName;
-        private final TextView tvChapterDiscription;
+        private final TextView tvChapterDescription;
         private final CheckBox cbChapter;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -48,7 +46,7 @@ public class AdapterChapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             tvChapterName = itemView.findViewById(R.id.tv_chapter_name);
             cbChapter = itemView.findViewById(R.id.cb_chapter);
-            tvChapterDiscription = itemView.findViewById(R.id.tv_chapter_description);
+            tvChapterDescription = itemView.findViewById(R.id.tv_chapter_description);
         }
     }
 
@@ -70,7 +68,7 @@ public class AdapterChapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         ((MyViewHolder) holder).tvChapterName.setText(chapter.getName());
         ((MyViewHolder) holder).cbChapter.setChecked(chapter.isChecked());
-        ((MyViewHolder) holder).tvChapterDiscription.setText(chapter.getDescription());
+        ((MyViewHolder) holder).tvChapterDescription.setText(chapter.getDescription());
 
         ((MyViewHolder) holder).cbChapter.setOnClickListener(
                 new View.OnClickListener() {
